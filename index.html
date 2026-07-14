@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalPress.store | Distributed News Publisher</title>
+    <meta name="description" content="Global independent press release publishing platform.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased">
+
+    <!-- Header -->
+    <header class="border-b bg-white uppercase tracking-widest text-xs py-5 text-center font-bold sticky top-0 z-50 shadow-sm">
+        GlobalPress.store — Open Distribution Network
+    </header>
+
+    <!-- SECTION 1: FORM INPUT USER -->
+    <section id="input-section" class="max-w-2xl mx-auto px-6 py-8 my-6 bg-white shadow-md rounded-lg border border-gray-100">
+        <h2 class="text-xl font-bold mb-6 border-b pb-2 text-gray-800">Publish Your Press Release</h2>
+        
+        <form id="press-form" class="space-y-4">
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Title (Judul)</label>
+                <input type="text" id="in-title" required class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Subtitle (Sub Judul)</label>
+                <input type="text" id="in-subtitle" required class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Body Content (Isi Berita)</label>
+                <textarea id="in-body" rows="8" required class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none font-mono text-sm" placeholder="Write neutral news body here... minimum 350 words recommended."></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Image URL (Link Gambar)</label>
+                    <input type="url" id="in-img" placeholder="https://example.com/image.jpg" class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Release Date (Tanggal Rilis)</label>
+                    <input type="text" id="in-date" placeholder="July 14, 2026" required class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Company Name</label>
+                    <input type="text" id="in-company" required class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Email Contact</label>
+                    <input type="email" id="in-email" required class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Phone Number</label>
+                    <input type="text" id="in-phone" required class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Custom Website URL</label>
+                    <input type="url" id="in-web" placeholder="https://yourcompany.com" required class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Location City/Country</label>
+                    <input type="text" id="in-location" placeholder="JAKARTA, INDONESIA" required class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded transition tracking-wide uppercase text-sm mt-4">
+                Submit & Publish Live
+            </button>
+        </form>
+    </section>
+
+    <!-- SECTION 2: LIVE PRESS DISPLAY (Tersembunyi di awal, muncul setelah submit) -->
+    <main id="output-section" class="max-w-3xl mx-auto px-4 py-8 my-6 bg-white shadow-sm rounded-lg border border-gray-100 hidden">
+        <article>
+            <p class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2">FOR IMMEDIATE RELEASE</p>
+            
+            <h1 id="view-title" class="text-3xl font-extrabold tracking-tight mb-2 text-gray-900 leading-tight"></h1>
+            <h2 id="view-subtitle" class="text-lg text-gray-600 mb-6 font-normal italic leading-snug"></h2>
+            
+            <div class="text-xs text-gray-500 mb-6 font-medium flex items-center space-x-2">
+                <span id="view-location" class="font-bold text-gray-700"></span>
+                <span>&bull;</span>
+                <span id="view-date"></span>
+            </div>
+
+            <!-- Wadah Gambar Otomatis -->
+            <div id="view-img-container" class="mb-8 hidden">
+                <img id="view-img" src="" alt="Press Release Image" class="w-full h-auto rounded-lg shadow-sm object-cover max-h-[420px]">
+            </div>
+
+            <!-- Isi Berita Utama -->
+            <div id="view-body" class="space-y-5 leading-relaxed text-gray-800 text-base border-b pb-8 whitespace-pre-wrap"></div>
+
+            <!-- Media Contact Section -->
+            <section class="pt-6 text-sm grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-bold text-gray-950 uppercase tracking-wider text-xs mb-2">Media Relations Contact</h3>
+                    <p id="view-company" class="font-semibold text-gray-800"></p>
+                    <p class="text-gray-600">Email: <span id="view-email" class="text-blue-600"></span></p>
+                    <p class="text-gray-600">Phone: <span id="view-phone"></span></p>
+                </div>
+                <div class="md:text-right">
+                    <h3 class="font-bold text-gray-950 uppercase tracking-wider text-xs mb-2">Corporate Logistics</h3>
+                    <p class="text-gray-600">Official Portal: <a id="view-web" href="" target="_blank" class="text-blue-600 hover:underline"></a></p>
+                </div>
+            </section>
+        </article>
+        
+        <div class="mt-8 pt-6 border-t text-center">
+            <button onclick="window.location.reload()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs font-bold py-2 px-4 rounded transition">
+                ← Create Another Press Release
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-xs text-gray-400 border-t bg-white mt-12">
+        &copy; 2026 GlobalPress.store. Network Infrastructure.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
