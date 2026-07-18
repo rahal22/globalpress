@@ -66,3 +66,48 @@ function applyLanguage() {
 window.addEventListener("DOMContentLoaded", () => {
   applyLanguage();
 });
+async function downloadPixverseVideo() {
+    const inputUrl = document.getElementById('input-url-box').value; // Sesuaikan ID element input Anda
+    const statusText = document.getElementById('status-text'); // Sesuaikan ID element status Anda
+
+    if (!inputUrl) {
+        alert("Silakan tempel link video Pixverse terlebih dahulu!");
+        return;
+    }
+
+    if (statusText) statusText.innerText = "Sedang memproses video...";
+
+    try {
+        // Mengirimkan URL ke fetch.php menggunakan FormData
+        const formData = new FormData();
+        formData.append('url', inputUrl);
+
+        // Jika index.html dan fetch.php berada di folder yang sama di Vercel:
+        const response = await fetch('fetch.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.success && data.video_url) {
+            if (statusText) statusText.innerText = "Unduhan dimulai!";
+            
+            // Membuat element anchor bayangan untuk memicu download otomatis file MP4 asli
+            const a = document.createElement('a');
+            a.href = data.video_url;
+            a.download = 'pixverse_video.mp4';
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        } else {
+            alert("Error: " + (data.message || "Gagal mengambil video."));
+            if (statusText) statusText.innerText = "";
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Terjadi kesalahan sistem saat menghubungi server.");
+        if (statusText) statusText.innerText = "";
+    }
+}
