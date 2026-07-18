@@ -5,8 +5,8 @@ function pasteLink() {
   });
 }
 
-// Start the download process
-function startDownload() {
+// Start the download process (Sudah diperbaiki tanpa PHP)
+async function startDownload() {
   const rawText = document.getElementById("linkInput").value.trim();
   const pixverseLink = extractPixverseLink(rawText);
 
@@ -17,12 +17,62 @@ function startDownload() {
     return;
   }
 
-  window.location.href = `fetch.php?url=${encodeURIComponent(pixverseLink)}`;
+  // Membuat info status sederhana di bawah tombol (opsional agar user tahu web sedang bekerja)
+  let statusDiv = document.getElementById("downloadStatus");
+  if (!statusDiv) {
+    statusDiv = document.createElement("div");
+    statusDiv.id = "downloadStatus";
+    statusDiv.style.color = "#ffffff";
+    statusDiv.style.marginTop = "10px";
+    statusDiv.style.textAlign = "center";
+    document.getElementById("linkInput").parentNode.appendChild(statusDiv);
+  }
+  statusDiv.innerText = "Menganalisis video Pixverse...";
+
+  try {
+    // Membaca isi halaman Pixverse lewat CORS Proxy gratis (allorigins)
+    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(pixverseLink)}`;
+    const response = await fetch(proxyUrl);
+    
+    if (!response.ok) throw new Error("Gagal terhubung ke proxy server.");
+    
+    const data = await response.json();
+    const htmlContent = data.contents;
+
+    // Regex untuk mencari direct link video mp4 asli milik Pixverse
+    const videoPattern = /https:\/\/media\.pixverse\.ai\/[^"'\s>]+\.mp4/;
+    const videoMatches = htmlContent.match(videoPattern);
+
+    if (videoMatches && videoMatches[0]) {
+      // Bersihkan karakter encoding amp jika ada
+      let directVideoUrl = videoMatches[0].replace(/&amp;/g, '&');
+      
+      statusDiv.innerText = "Unduhan dimulai!";
+      
+      // Pemicu download otomatis file MP4 asli ke device user
+      const a = document.createElement('a');
+      a.href = directVideoUrl;
+      a.download = 'pixverse_video.mp4';
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      
+      setTimeout(() => { statusDiv.innerText = ""; }, 3000);
+    } else {
+      alert("Gagal menemukan tautan video asli. Pastikan link video publik.");
+      statusDiv.innerText = "";
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Terjadi kesalahan sistem saat mengambil data video.");
+    statusDiv.innerText = "";
+  }
 }
 
 // Ambil hanya link Pixverse dari teks
 function extractPixverseLink(text) {
-  const regex = /(https?:\/\/(?:www\.)?share\.pix\.video\/[^\s]+)/;
+  const regex = /(https?:\/\/(?:www\.)?share\.pix\.video\/video\/[0-9]+)/;
   const match = text.match(regex);
   return match ? match[1] : null;
 }
@@ -66,48 +116,3 @@ function applyLanguage() {
 window.addEventListener("DOMContentLoaded", () => {
   applyLanguage();
 });
-async function downloadPixverseVideo() {
-    const inputUrl = document.getElementById('input-url-box').value; // Sesuaikan ID element input Anda
-    const statusText = document.getElementById('status-text'); // Sesuaikan ID element status Anda
-
-    if (!inputUrl) {
-        alert("Silakan tempel link video Pixverse terlebih dahulu!");
-        return;
-    }
-
-    if (statusText) statusText.innerText = "Sedang memproses video...";
-
-    try {
-        // Mengirimkan URL ke fetch.php menggunakan FormData
-        const formData = new FormData();
-        formData.append('url', inputUrl);
-
-        // Jika index.html dan fetch.php berada di folder yang sama di Vercel:
-        const response = await fetch('fetch.php', {
-            method: 'POST',
-            body: formData
-        });
-
-        const data = await response.json();
-
-        if (data.success && data.video_url) {
-            if (statusText) statusText.innerText = "Unduhan dimulai!";
-            
-            // Membuat element anchor bayangan untuk memicu download otomatis file MP4 asli
-            const a = document.createElement('a');
-            a.href = data.video_url;
-            a.download = 'pixverse_video.mp4';
-            a.target = '_blank';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        } else {
-            alert("Error: " + (data.message || "Gagal mengambil video."));
-            if (statusText) statusText.innerText = "";
-        }
-    } catch (error) {
-        console.error(error);
-        alert("Terjadi kesalahan sistem saat menghubungi server.");
-        if (statusText) statusText.innerText = "";
-    }
-}
