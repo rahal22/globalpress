@@ -1,0 +1,137 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #7b2ff7, #f107a3);
+  color: white;
+  text-align: center;
+  transition: background 0.5s, color 0.5s;
+}
+body.dark {
+  background: #121212;
+  color: #eee;
+}
+.navbar {
+  background: white;
+  color: #7b2ff7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  font-weight: bold;
+}
+body.dark .navbar {
+  background: #1f1f1f;
+  color: white;
+}
+.left-nav {
+  display: flex;
+  align-items: center;
+}
+.logo-img {
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+}
+.menu-toggle {
+  font-size: 24px;
+  cursor: pointer;
+}
+.menu {
+  display: none;
+  flex-direction: column;
+  background: #fff;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+body.dark .menu {
+  background: #2a2a2a;
+}
+.menu a {
+  color: #7b2ff7;
+  padding: 12px 20px;
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #ddd;
+}
+body.dark .menu a {
+  color: white;
+  border-color: #444;
+}
+.menu a:last-child {
+  border-bottom: none;
+}
+.right-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+main {
+  padding: 40px 20px;
+}
+.input-group {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+.input-group input {
+  padding: 12px;
+  border: none;
+  border-radius: 8px 0 0 8px;
+  font-size: 16px;
+  width: 60%;
+}
+.input-group button {
+  padding: 12px 20px;
+  border: none;
+  background: white;
+  color: #7b2ff7;
+  font-weight: bold;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+}
+.download-btn {
+  padding: 14px 28px;
+  font-size: 16px;
+  background: white;
+  color: #7b2ff7;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.subtitle, .tutor-text {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #eee;
+}
+footer {
+  padding: 20px;
+  background: #ffffff;
+  color: black;
+}
+body.dark footer {
+  background: #1f1f1f;
+  color: #aaa;
+}
+.animate-slide {
+  animation: slideIn 1s ease-out;
+}
+.animate-fade {
+  animation: fadeIn 1.4s ease-out;
+}
+@keyframes slideIn {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

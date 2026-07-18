@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<!-- Script Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6047225879376736"
+      crossorigin="anonymous"></script>
+
+  <title>Pixverse Downloader</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div id="loader">VersusGiants</div>
+
+  <header class="navbar">
+    <div class="left-nav">
+      <img src="logo.png" alt="VG Logo" class="logo-img"/>
+      <div class="logo">VG TOOLS</div>
+    </div>
+    <div class="right-controls">
+      <button onclick="toggleDarkMode()" class="theme-toggle">🌙</button>
+      <select onchange="setLanguage(this.value)" class="lang-select">
+        <option value="id">🇮🇩</option>
+        <option value="en">🇺🇸</option>
+      </select>
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    </div>
+    <div class="menu" id="navMenu">
+      <a href="about.html" data-i18n="menu.about">About</a>
+      <a href="contact.html" data-i18n="menu.contact">Contact</a>
+      <a href="channel.html" data-i18n="menu.channel">Channel</a>
+      <a href="privacy.html"
+data-i18n="menu.privacy">Privacy</a>
+    </div>
+  </header>
+
+  <main>
+    <h1 data-i18n="title">Pixverse Downloader</h1>
+    <p class="subtitle" data-i18n="by">by Versus Giants</p>
+
+    <div class="input-group animate-slide">
+      <input type="text" id="linkInput" placeholder="https://share.pix.video/abc123" />
+      <button onclick="pasteLink()" data-i18n="btn.paste">Tempel</button>
+    </div>
+
+    <p class="tutor-text" data-i18n="instruction">
+      Tempel link video dari Pixverse di atas, lalu klik tombol download untuk mulai mengunduh tanpa watermark.
+    </p>
+    <button class="download-btn animate-fade" onclick="startDownload()" data-i18n="btn.download">Download</button>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Versus Giant AI. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
