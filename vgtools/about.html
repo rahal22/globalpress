@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #fdfbfb, #ebedee);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 42px;
+      text-align: center;
+      color: #222;
+      margin-bottom: 20px;
+      animation: fadeInDown 1.2s ease;
+    }
+
+    .highlight {
+      color: #e63946;
+      font-weight: bold;
+    }
+
+    .section {
+      background: #fff;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+      animation: fadeInUp 1.5s ease;
+      animation-fill-mode: both;
+    }
+
+    .section:nth-child(odd) {
+      animation-delay: 0.3s;
+    }
+
+    .section:nth-child(even) {
+      animation-delay: 0.6s;
+    }
+
+    .section i {
+      font-size: 24px;
+      color: #e63946;
+      margin-right: 12px;
+    }
+
+    h2 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      color: #1d3557;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .home-button {
+      display: block;
+      width: fit-content;
+      margin: 50px auto 20px;
+      padding: 14px 30px;
+      background-color: #e63946;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+    }
+
+    .home-button:hover {
+      transform: scale(1.05);
+      background-color: #d62828;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #999;
+    }
+
+    .image-section {
+      text-align: center;
+      margin-top: 60px;
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    .image-section h2 {
+      font-size: 30px;
+      color: #1d3557;
+      margin-bottom: 15px;
+    }
+
+    .image-section img {
+      width: 90%;
+      max-width: 600px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 50px;
+      transition: transform 0.3s ease;
+    }
+
+    .image-section img:hover {
+      transform: scale(1.02);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1><i class="fas fa-info-circle"></i> About <span class="highlight">VG TOOLS</span></h1>
+
+    <div class="section">
+      <h2><i class="fas fa-rocket"></i> Our Mission</h2>
+      <p>We aim to empower creators with simple, powerful, and free tools that make content creation easier, faster, and smarter. Whether you're downloading videos, editing them, or discovering new AI-powered possibilities — we are here to help.</p>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-lightbulb"></i> Why We Exist</h2>
+      <p>In a world full of distractions, we want to provide smart tools that help you stand out. VG TOOLS was born from the idea that technology should help creators — not complicate things. Our platform simplifies complex tasks into a few clicks.</p>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-users"></i> Who We Are</h2>
+      <p>We are a team of creative developers, designers, and dreamers from across the globe, working together to bring accessible AI and digital tools to everyone. No matter where you are, you can use VG TOOLS without limitations.</p>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-chart-line"></i> Our Growth</h2>
+      <p>Starting from a simple downloader project, we’ve expanded into a full suite of smart utilities used by thousands of creators each month. Our journey is just getting started — and you're part of it.</p>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-heart"></i> Our Values</h2>
+      <p>We believe in freedom, simplicity, and accessibility. We never sell your data, we keep everything secure, and we believe the best tools should be available for everyone, for free.</p>
+    </div>
+
+    <div class="image-section">
+      <h2>OWNER & COMPANY</h2>
+      <img src="images/gambar1.png" alt="Owner Profile">
+    </div>
+
+    <div class="image-section">
+      <h2>MEET THE TEAM AT OUR OFFICE</h2>
+      <img src="images/gambar2.png" alt="Team in Office">
+    </div>
+
+    <a href="index.html" class="home-button"><i class="fas fa-home"></i> Back to Home</a>
+  </div>
+
+  <footer>
+    &copy; 2025 Versus Giants. Built with ❤️ for the creative world.
+  </footer>
+
+</body>
+</html>
